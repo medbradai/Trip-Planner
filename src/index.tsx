@@ -1,15 +1,40 @@
 import reportWebVitals from "./reportWebVitals";
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {createRoot} from "react-dom/client";
 import "src/utils/i18n/i18n";
-import TripPlannerScreen from "src/views/TripPlannerScreen/TripPlannerScreen";
+import DestinationScreen from "src/views/DestinationScreen/DestinationScreen";
+import ParticipantsScreen from "src/views/ParticipantsScreen/ParticipantsScreen";
+import ResultScreen from "src/views/ResultScreen/ResultScreen";
+import ThemeScreen from "src/views/ThemeScreen/ThemeScreen";
+import DatesScreen from "src/views/DatesScreen/DatesScreen";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement as Element);
 
 root.render(
     <BrowserRouter>
-        <TripPlannerScreen/>
+        <Routes>
+            <Route
+                path={"/"}
+                element={<DestinationScreen/>}
+            />
+            <Route
+                path={"/participants"}
+                element={<ParticipantsScreen/>}
+            />
+            <Route
+                path={"/dates"}
+                element={<DatesScreen/>}
+            />
+            <Route
+                path={"/theme"}
+                element={<ThemeScreen/>}
+            />
+            <Route
+                path={"/result"}
+                element={<ResultScreen/>}
+            />
+        </Routes>
     </BrowserRouter>,
 );
 

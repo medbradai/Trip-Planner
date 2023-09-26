@@ -1,3 +1,7 @@
+.result--item-container {
+    margin-top: 1vw;
+}
+
 .result--buttons-container {
     width: 100%;
     display: flex;

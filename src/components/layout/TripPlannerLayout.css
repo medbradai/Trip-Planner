@@ -30,9 +30,22 @@
     padding-bottom: 5vw;
 }
 
-.trip-planner-screen--form {
-    margin-top: 5%;
-    width: 100%
+.trip-planner-screen--last-step {
+    position: relative;
+    z-index: 1;
+}
+
+.trip-planner-screen--last-step > a {
+    z-index: 1;
+    color: #9C9C9C;
+    font-style: italic;
+}
+
+.trip-planner-screen--route-content {
+    width: 100%;
+    margin-top: -5vw;
+    padding-left: 10vw;
+    padding-right: 10vw;
 }
 
 .trip-planner-screen--city-container {

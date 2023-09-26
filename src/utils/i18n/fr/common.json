@@ -4,7 +4,7 @@
     "no": "Non",
     "title2": "Ici, tout est personnalisé, préparé et réservé en 1 seule fois !",
     "title1": "Planifiez votre moment de manière optimale",
-    "city": "Dans quelle ville souhaitez-vous partir ?",
+    "city": "Dans quelle ville souhaitez-vous aller ?",
     "participants": {
       "title": "Serez-vous seul ou accompagné ?",
       "count": {
@@ -13,6 +13,7 @@
         "babies": "Bébé"
       }
     },
+    "previous": "étape précédente",
     "date": "A quelle date ?",
     "budget": "Quelle thématique vous donne envie ?",
 
