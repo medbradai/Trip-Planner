@@ -4,11 +4,16 @@ import {Button, Typography} from "antd";
 import {useTranslation} from "react-i18next";
 import {SendOutlined} from "@ant-design/icons";
 import {StepPropsType} from "src/components/steps/step.props";
-import {PersonsCount, stepsTitleStyle} from "src/views/TripPlannerScreen/TripPlannerScreen";
+import {stepsTitleStyle} from "src/views/TripPlannerScreen/TripPlannerScreen";
 import ParticipantsCard from "src/components/steps/Participants/ParticipantsCard/ParticipantsCard";
+import {setTripPlanner} from "../../../store/TripPlannerEvents";
+import {useStore} from "effector-react";
+import {TripPlannerStore} from "../../../store/TripPlannerStore";
+import {PersonsCount} from "../../../store/trip.planer";
 
-const Participants: FunctionComponent<StepPropsType> = ({next, form, tripPlanner, setTripPlanner}) => {
+const Participants: FunctionComponent<StepPropsType> = ({next, form}) => {
     const {t} = useTranslation();
+    const tripPlanner = useStore(TripPlannerStore);
 
     const [participantsCount, setParticipantsCount] = useState<PersonsCount>({
         adultsCount: 1,
@@ -18,7 +23,7 @@ const Participants: FunctionComponent<StepPropsType> = ({next, form, tripPlanner
 
     const handleNext = () => {
         setTripPlanner({
-            ...tripPlanner,
+            ...tripPlanner.data,
             personsCount: participantsCount,
         });
         next();
@@ -59,7 +64,7 @@ const Participants: FunctionComponent<StepPropsType> = ({next, form, tripPlanner
                                       ...participantsCount,
                                       babiesCount: newValue
                                   })}/>
-                <Button type="primary" icon={<SendOutlined/>} onClick={handleNext}
+                <Button type="primary" icon={<SendOutlined  rotate={-45}/>} onClick={handleNext}
                         className="participants--card participants--card-next-button"/>
             </div>
         </>

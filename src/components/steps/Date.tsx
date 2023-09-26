@@ -8,11 +8,15 @@ import dayjs from 'dayjs';
 import locale from 'antd/es/date-picker/locale/fr_FR';
 
 import 'dayjs/locale/fr';
+import {setTripPlanner} from "../../store/TripPlannerEvents";
+import {useStore} from "effector-react";
+import {TripPlannerStore} from "../../store/TripPlannerStore";
 
 const { RangePicker } = DatePicker;
-const Destination: FunctionComponent<StepPropsType> = ({ next, form, tripPlanner, setTripPlanner }) => {
+const Destination: FunctionComponent<StepPropsType> = ({ next, form }) => {
     const {t} = useTranslation();
 
+    const tripPlanner = useStore(TripPlannerStore);
     const handleNext = () => {
         form.validateFields().then(() => {
                 const startDate = dayjs(form.getFieldValue("date")[0]);
@@ -20,7 +24,7 @@ const Destination: FunctionComponent<StepPropsType> = ({ next, form, tripPlanner
                 const days = endDate.diff(startDate,'day');
                 if (days) {
                     setTripPlanner({
-                        ...tripPlanner,
+                        ...tripPlanner.data,
                         days,
                     });
                     next();

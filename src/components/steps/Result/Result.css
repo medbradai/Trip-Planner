@@ -1,0 +1,15 @@
+.result--buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.result--buttons-container > button {
+    width: 100%;
+    margin: 0 1vw;
+}
+
+.result--confirm-button {
+    background-color: #DEFCED;
+    color: black;
+}

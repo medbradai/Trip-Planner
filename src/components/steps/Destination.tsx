@@ -2,23 +2,26 @@ import {FunctionComponent} from "react";
 import {Button, Form, FormInstance, Input, Space, Typography} from "antd";
 import {useTranslation} from "react-i18next";
 import {SendOutlined} from "@ant-design/icons";
-import {stepsTitleStyle, TripPlannerData} from "src/views/TripPlannerScreen/TripPlannerScreen";
+import {stepsTitleStyle} from "src/views/TripPlannerScreen/TripPlannerScreen";
+import {setTripPlanner} from "../../store/TripPlannerEvents";
+import {useStore} from "effector-react";
+import {TripPlannerStore} from "../../store/TripPlannerStore";
 
 export interface PropsType {
     next: () => void;
     form: FormInstance,
-    tripPlanner: TripPlannerData,
-    setTripPlanner: (newDatas: TripPlannerData) => void;
 }
-const Destination: FunctionComponent<PropsType> = ( { next, form, tripPlanner, setTripPlanner }) => {
+const Destination: FunctionComponent<PropsType> = ( { next, form }) => {
     const {t} = useTranslation();
+
+    const tripPlanner = useStore(TripPlannerStore);
 
     const handleNext = () => {
         form.validateFields().then(() => {
                 const destination = form.getFieldValue("cityQuery")
                 if (destination) {
                     setTripPlanner({
-                        ...tripPlanner,
+                        ...tripPlanner.data,
                         destination,
                     });
                     next();

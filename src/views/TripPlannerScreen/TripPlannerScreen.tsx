@@ -7,61 +7,39 @@ import {apiKey, modelApiUrl} from "src/utils/constants";
 import Destination from "src/components/steps/Destination";
 import Participants from "src/components/steps/Participants/Participants";
 import Date from "src/components/steps/Date";
-import Result from "src/components/steps/Result";
-import Budget from "src/components/steps/Budget";
+import Result from "src/components/steps/Result/Result";
+import Theme from "src/components/steps/Theme/Theme";
+import {useStore} from "effector-react";
+import {TripPlannerStore} from "../../store/TripPlannerStore";
 
 const steps = (
     next: () => void,
     form: FormInstance,
-    tripPlanner: TripPlannerData,
-    setTripPlanner: (newData: TripPlannerData) => void,
 ) => [
     {
         title: "",
-        content: <Destination next={next} form={form} tripPlanner={tripPlanner} setTripPlanner={setTripPlanner}/>
+        content: <Destination next={next} form={form} />
     },
     {
         title: "",
-        content: <Participants next={next} form={form} tripPlanner={tripPlanner} setTripPlanner={setTripPlanner}/>,
+        content: <Participants next={next} form={form} />,
     },
     {
         title: "",
-        content: <Date next={next} form={form} tripPlanner={tripPlanner} setTripPlanner={setTripPlanner}/>,
+        content: <Date next={next} form={form} />,
     },
     {
         title: "",
-        content: <Budget next={next} form={form} tripPlanner={tripPlanner} setTripPlanner={setTripPlanner}/>,
+        content: <Theme next={next} form={form} />,
     },
     {
         title: "",
-        content: <Result tripPlanner={tripPlanner}/>,
+        content: <Result />,
         disabled: true
     },
 ];
 
-export interface TripPlannerData {
-    destination?: string;
-    personsCount?: PersonsCount;
-    budget?: number;
-    days?: number;
-}
 
-export interface PersonsCount {
-    adultsCount: number;
-    childrenCount: number;
-    babiesCount: number;
-}
-
-const subTitleStyle: React.CSSProperties = {
-    fontSize: "20px",
-    marginTop: "5%",
-    fontWeight: 600,
-    fontStyle: "italic"
-};
-
-const titleStyle: React.CSSProperties = {
-    fontSize: "30",
-};
 
 export const stepsTitleStyle: React.CSSProperties = {
     fontSize: "18px",
@@ -75,21 +53,24 @@ const TripPlannerScreen: FunctionComponent = () => {
     const {t} = useTranslation();
     const [form] = Form.useForm();
 
+    const tripPlanner = useStore(TripPlannerStore);
+
     const [messageApi, contextHolder] = message.useMessage();
 
     const [result, setResult] = useState<string | undefined>();
     const [isLoading, setLoading] = useState<boolean>(false);
     const [current, setCurrent] = useState<number>(0);
-    const [tripPlannerData, setTripPlannerData] = useState<TripPlannerData>({});
 
-    const handleSubmit = (values: TripPlannerData) => {
+    const handleSubmit = () => {
         setLoading(true);
         fetch(`${modelApiUrl}`, {
             method: "POST",
             headers: {'Content-Type': 'application/json', 'X-Api-Key': apiKey},
             body:  JSON.stringify({
-                ...tripPlannerData,
-                persons: tripPlannerData.personsCount?.adultsCount
+                destination: tripPlanner.query,
+                persons: 1,
+                budget: 100,
+                days: 2
             })
 
         }).then((response) => {
@@ -101,7 +82,6 @@ const TripPlannerScreen: FunctionComponent = () => {
         });
 
     }
-
     const onStepperChange = (value: number) => {
         setCurrent(value);
     };
@@ -114,8 +94,8 @@ const TripPlannerScreen: FunctionComponent = () => {
         <Layout className="layout">
             {contextHolder}
             <Header className="trip-planner-screen--header">
-                <Typography.Title style={subTitleStyle} level={2}>{t("common.title2")}</Typography.Title>
-                <Typography.Title style={titleStyle} level={1}>{t("common.title1")}</Typography.Title>
+                <Typography.Title className="trip-planner-screen--header-subtitle" level={2}>{t("common.title2")}</Typography.Title>
+                <Typography.Title className="trip-planner-screen--header-title" level={1}>{t("common.title1")}</Typography.Title>
 
             </Header>
             <Content className="trip-planner-screen--content">
@@ -133,8 +113,8 @@ const TripPlannerScreen: FunctionComponent = () => {
                     </div>
                     <Spin tip="Loading..." spinning={isLoading}>
                         <Form layout={"vertical"} className="trip-planner-screen--form" onFinish={handleSubmit} form={form}>
-                            <Steps current={current} items={steps(next, form, tripPlannerData, setTripPlannerData)} onChange={onStepperChange}/>
-                            <div className="trip-planner-screen--content">{steps(next, form, tripPlannerData, setTripPlannerData)[current].content}</div>
+                            <Steps current={current} items={steps(next, form)} onChange={onStepperChange}/>
+                            <div className="trip-planner-screen--content">{steps(next, form)[current].content}</div>
                         </Form>
                     </Spin>
 

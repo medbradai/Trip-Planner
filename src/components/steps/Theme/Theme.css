@@ -1,0 +1,21 @@
+.theme--cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.theme--card {
+    margin: 0 0.5rem 0.5rem 0.5rem;
+    padding: 0;
+    box-shadow: 1px 4px 10px 0px rgba(143,143,143,1);
+    border: none;
+    border-radius: 0.5rem;
+    width: 12vw !important;
+    height: auto;
+}
+
+.theme--next-button-card {
+    align-self: stretch;
+    background-color: #1E1852;
+}

@@ -9,7 +9,7 @@
     padding: 1rem;
     box-shadow: 1px 4px 10px 0px rgba(143,143,143,1);
     border-radius: 0.5rem;
-    width: 12vw !important;
+    min-width: 12vw !important;
     height: auto;
 }
 

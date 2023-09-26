@@ -4,6 +4,16 @@
     background-color: #F7F5FF;
 }
 
+.trip-planner-screen--header-subtitle {
+    font-size: 20px !important;
+    margin-top: 5%;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.trip-planner-screen--header-title {
+    font-size: 30px !important;
+}
 
 .trip-planner-screen--title {
     font-size: 18px;
@@ -13,10 +23,11 @@
 }
 
 .trip-planner-screen--content {
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 10vw;
+    padding-right: 10vw;
     background-color: #FFFFFF;
     line-height: 64px;
+    padding-bottom: 5vw;
 }
 
 .trip-planner-screen--form {

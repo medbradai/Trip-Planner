@@ -19,7 +19,7 @@
     "empty": "Renseigner le champ",
     "result": {
       "title": "Vous souhaitez partir",
-      "data": "à {{ tripPlanner.destination }} avec {{ tripPlanner.personsCount.adultsCount }} personnes(s) pendant {{ tripPlanner.days }} jours pour un budget de {{ tripPlanner.budget }}",
+      "data": "à {{ tripPlanner.destination }} avec {{ tripPlanner.personsCount.adultsCount }} personnes(s) pendant {{ tripPlanner.days }} jours pour un moment {{ tripPlanner.budget }}",
       "confirm": "C’est bien cela ?",
       "result": "Voici ce que je vous propose :"
     },
@@ -30,6 +30,15 @@
       "budget": "Budget",
       "theme": "Thématique",
       "result": "Résultat"
+    },
+    "themes": {
+      "relaxation": "Détente",
+      "sport": "Sportive",
+      "romance": "Romantique",
+      "discovery": "Découverte",
+      "family": "En famille",
+      "lowCost": "Pas cher",
+      "unusual": "Insolite"
     },
     "success": "Votre voyage a été planifié avec succès"
   }
