@@ -9,6 +9,7 @@ import {setTripPlannerQuery} from "../../store/TripPlannerEvents";
 import {apiKey, modelApiUrl} from "src/utils/constants";
 import Frise from "src/components/Frise/Frise";
 import {useNavigate} from "react-router-dom";
+import {buildAIQuery, buildFrenchQuery} from "src/utils/helpers/query-ai-helper";
 
 
 const ResultScreen: FunctionComponent = () => {
@@ -44,14 +45,8 @@ const ResultScreen: FunctionComponent = () => {
     }
 
     const buildTripPlannerQueryFromData = useCallback((): string[] => {
-        const englishQuery = `destination  ${tripPlanner.data.destination} with ${tripPlanner.data.personsCount?.adultsCount && `${tripPlanner.data.personsCount.adultsCount}  adult(s)`}${tripPlanner.data.personsCount?.childrenCount ? `, ${tripPlanner.data.personsCount.childrenCount} children` : ''}${tripPlanner.data.personsCount?.babiesCount ? ` and ${tripPlanner.data.personsCount.babiesCount}  babies` : ''} for ${tripPlanner.data.days} days for a moment ${tripPlanner.data.theme &&  t(tripPlanner.data.theme.label)}`;
-        const frenchQuery = `à ${tripPlanner.data.destination} avec 
-        ${tripPlanner.data.personsCount?.adultsCount && `${tripPlanner.data.personsCount.adultsCount}  adulte(s)`}
-         ${tripPlanner.data.personsCount?.childrenCount ? `, ${tripPlanner.data.personsCount.childrenCount}  enfant(s)` : ''}
-             ${tripPlanner.data.personsCount?.babiesCount ? `et ${tripPlanner.data.personsCount.babiesCount}  bébé(s)` : ''}
-         pendant ${tripPlanner.data.days} jours pour un moment ${tripPlanner.data.theme && t(tripPlanner.data.theme.label)}`
-        return [englishQuery, frenchQuery]
-    }, [tripPlanner.data, t]);
+       return [buildAIQuery(tripPlanner.data), buildFrenchQuery(tripPlanner.data)]
+    }, [tripPlanner.data]);
 
     useEffect(() => {
         setTripPlannerQuery(buildTripPlannerQueryFromData())
