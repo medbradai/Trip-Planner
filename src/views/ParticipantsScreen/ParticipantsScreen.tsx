@@ -3,7 +3,7 @@ import {FunctionComponent, useState} from "react";
 import {Button, Typography} from "antd";
 import {useTranslation} from "react-i18next";
 import {SendOutlined} from "@ant-design/icons";
-import TripPlannerLayout, {stepsTitleStyle} from "src/components/layout/TripPlannerLayout";
+import TripPlannerLayout from "src/components/layout/TripPlannerLayout";
 import ParticipantsCard from "src/components/participants/ParticipantsCard/ParticipantsCard";
 import {setTripPlanner} from "../../store/TripPlannerEvents";
 import {useStore} from "effector-react";
@@ -35,7 +35,8 @@ const ParticipantsScreen: FunctionComponent = () => {
     return (
         <TripPlannerLayout previousUrl="/">
             <>
-                <Typography.Text style={stepsTitleStyle}>{t("common.participants.title")}</Typography.Text>
+                <Typography.Text
+                    className="trip-planner-screen--content-title">{t("common.participants.title")}</Typography.Text>
                 <div className="participants--cards">
                     <ParticipantsCard countText={t("common.participants.count.adults")}
                                       countValue={participantsCount.adultsCount}

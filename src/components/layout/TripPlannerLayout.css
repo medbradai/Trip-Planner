@@ -30,6 +30,13 @@
     padding-bottom: 5vw;
 }
 
+.trip-planner-screen--content-title {
+    font-size: 18px;
+    font-family: "Open Sans", serif;
+    color: #2816C0;
+    font-weight: 600;
+}
+
 .trip-planner-screen--last-step {
     position: relative;
     z-index: 1;

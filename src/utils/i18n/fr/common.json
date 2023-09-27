@@ -14,7 +14,10 @@
       }
     },
     "previous": "étape précédente",
-    "date": "A quelle date ?",
+    "date": {
+      "title": "A quelle date ?",
+      "days": "{{days}} nuit(s)"
+    },
     "budget": "Quelle thématique vous donne envie ?",
 
     "empty": "Renseigner le champ",

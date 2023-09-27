@@ -17,3 +17,7 @@
     background-color: #DEFCED;
     color: black;
 }
+
+.result-screen--result-title {
+    margin-top: 2vw;
+}

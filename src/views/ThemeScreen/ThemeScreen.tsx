@@ -3,7 +3,7 @@ import {FunctionComponent, useState} from "react";
 import {Button, Typography} from "antd";
 import {useTranslation} from "react-i18next";
 import {SendOutlined} from "@ant-design/icons";
-import TripPlannerLayout, {stepsTitleStyle} from "src/components/layout/TripPlannerLayout";
+import TripPlannerLayout from "src/components/layout/TripPlannerLayout";
 import {THEMES} from "src/utils/enums/theme";
 import ThemeCard from "src/components/theme/ThemeCard/ThemeCard";
 import {useStore} from "effector-react";
@@ -32,7 +32,7 @@ const ThemeScreen: FunctionComponent = () => {
     return (
         <TripPlannerLayout previousUrl="/dates">
             <>
-                <Typography.Text style={stepsTitleStyle}>{t("common.budget")}</Typography.Text>
+                <Typography.Text className="trip-planner-screen--content-title">{t("common.budget")}</Typography.Text>
                 <div className="theme--cards">
                     {THEMES.map(theme => {
                         return (

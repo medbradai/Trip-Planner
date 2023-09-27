@@ -1,8 +1,9 @@
-import {FunctionComponent} from "react";
-import {Button, DatePicker, Form, Space, Typography} from "antd";
+import "./DatesScreen.css";
+import {FunctionComponent, useState} from "react";
+import {Button, DatePicker, Form, Typography} from "antd";
 import {useTranslation} from "react-i18next";
 import {SendOutlined} from "@ant-design/icons";
-import TripPlannerLayout, {stepsTitleStyle} from "src/components/layout/TripPlannerLayout";
+import TripPlannerLayout from "src/components/layout/TripPlannerLayout";
 import dayjs from 'dayjs';
 import locale from 'antd/es/date-picker/locale/fr_FR';
 import 'dayjs/locale/fr';
@@ -18,6 +19,8 @@ const DatesScreen: FunctionComponent = () => {
 
     const tripPlanner = useStore(TripPlannerStore);
     const [form] = Form.useForm();
+
+    const[days, setDays] = useState<number | undefined>(undefined);
     const handleNext = () => {
         form.validateFields().then(() => {
                 const startDate = dayjs(form.getFieldValue("date")[0]);
@@ -37,17 +40,22 @@ const DatesScreen: FunctionComponent = () => {
     return (
         <TripPlannerLayout previousUrl="/participants">
             <Form form={form}>
-                <Typography.Text style={stepsTitleStyle}>{t("common.date")}</Typography.Text>
-                <Space.Compact style={{width: '100%'}}>
-                    <Form.Item
-                        name="date"
-                        rules={[{required: true, message: t("common.empty")}]}
-                        style={{width: '70%'}}
-                    >
-                        <RangePicker locale={locale}/>
-                    </Form.Item>
-                    <Button type="primary" icon={<SendOutlined/>} onClick={handleNext}/>
-                </Space.Compact>
+                <Typography.Text className="trip-planner-screen--content-title">{t("common.date.title")}</Typography.Text>
+                <Form.Item
+                    name="date"
+                    rules={[{required: true, message: t("common.empty")}]}
+                    style={{width: '70%'}}
+                >
+                    <RangePicker locale={locale} onChange={(values) => {
+                        const startDate = values && values[0];
+                        const endDate = values && values[1];
+                        startDate && endDate && setDays(endDate.diff(startDate, 'day'))
+                    }}/>
+                </Form.Item>
+                {days && <Typography.Text>{t("common.date.days", {days})}</Typography.Text>}
+                <div className="dates-screen--button-container">
+                <Button className="dates-screen--button" type="primary" icon={<SendOutlined rotate={-45}/>} onClick={handleNext}/>
+                </div>
             </Form>
         </TripPlannerLayout>
     )
