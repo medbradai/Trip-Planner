@@ -4,7 +4,7 @@ import {Button, Typography} from "antd";
 import {useTranslation} from "react-i18next";
 import {SendOutlined} from "@ant-design/icons";
 import TripPlannerLayout from "src/components/layout/TripPlannerLayout";
-import {THEMES} from "src/utils/enums/theme";
+import {THEMES, ThemeType} from "src/utils/enums/theme";
 import ThemeCard from "src/components/theme/ThemeCard/ThemeCard";
 import {useStore} from "effector-react";
 import {TripPlannerStore} from "../../store/TripPlannerStore";
@@ -17,7 +17,7 @@ const ThemeScreen: FunctionComponent = () => {
 
     const tripPlanner = useStore(TripPlannerStore);
 
-    const [theme, setTheme] = useState<string | undefined>(undefined);
+    const [theme, setTheme] = useState<ThemeType | undefined>(undefined);
 
     const handleNext = () => {
         if (theme) {
@@ -34,9 +34,9 @@ const ThemeScreen: FunctionComponent = () => {
             <>
                 <Typography.Text className="trip-planner-screen--content-title">{t("common.budget")}</Typography.Text>
                 <div className="theme--cards">
-                    {THEMES.map(theme => {
+                    {THEMES.map(themeCard => {
                         return (
-                            <ThemeCard theme={theme} onClickTheme={(value) => setTheme(value)}/>
+                            <ThemeCard theme={themeCard} onClickTheme={(clickedTheme) => setTheme(THEMES.find(theme => theme === clickedTheme))} isSelected={themeCard === theme}/>
                         )
                     })}
                     <Button type="primary" icon={<SendOutlined rotate={-45}/>} onClick={handleNext}

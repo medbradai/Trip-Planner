@@ -6,16 +6,17 @@ import {useTranslation} from "react-i18next";
 
 interface ThemeCardPropsType {
     theme: ThemeType,
-    onClickTheme: (value: string) => void;
+    onClickTheme: (theme: ThemeType) => void;
+    isSelected?: boolean;
 }
 
-const ThemeCard: FunctionComponent<ThemeCardPropsType> = ({theme, onClickTheme}) => {
+const ThemeCard: FunctionComponent<ThemeCardPropsType> = ({theme, onClickTheme, isSelected = false}) => {
 
     const {t} = useTranslation();
 
     return (
-        <Button type="default" onClick={() => onClickTheme(t(theme.label))}
-                className="theme--card">
+        <Button type="default" onClick={() => onClickTheme(theme)}
+                className={`theme--card ${isSelected ? 'theme--card-selected' : ''}`}>
             <Image
                 preview={false}
                 src={theme.imageSource}

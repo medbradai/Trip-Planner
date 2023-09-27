@@ -1,7 +1,9 @@
+import {ThemeType} from "@utils/enums/theme";
+
 export interface TripPlannerData {
     destination?: string;
     personsCount?: PersonsCount;
-    theme?: string;
+    theme?: ThemeType;
     days?: number;
 }
 

@@ -30,10 +30,7 @@ const ResultScreen: FunctionComponent = () => {
             method: "POST",
             headers: {'Content-Type': 'application/json', 'X-Api-Key': apiKey},
             body: JSON.stringify({
-                destination: tripPlanner.query,
-                persons: 1,
-                budget: 100,
-                days: 2
+                query: tripPlanner.englishQuery
             })
 
         }).then((response) => {
@@ -46,13 +43,15 @@ const ResultScreen: FunctionComponent = () => {
 
     }
 
-    const buildTripPlannerQueryFromData = useCallback((): string => {
-        return `à ${tripPlanner.data.destination} avec 
+    const buildTripPlannerQueryFromData = useCallback((): string[] => {
+        const englishQuery = `destination  ${tripPlanner.data.destination} with ${tripPlanner.data.personsCount?.adultsCount && `${tripPlanner.data.personsCount.adultsCount}  adult(s)`}${tripPlanner.data.personsCount?.childrenCount ? `, ${tripPlanner.data.personsCount.childrenCount} children` : ''}${tripPlanner.data.personsCount?.babiesCount ? ` and ${tripPlanner.data.personsCount.babiesCount}  babies` : ''} for ${tripPlanner.data.days} days for a moment ${tripPlanner.data.theme &&  t(tripPlanner.data.theme.label)}`;
+        const frenchQuery = `à ${tripPlanner.data.destination} avec 
         ${tripPlanner.data.personsCount?.adultsCount && `${tripPlanner.data.personsCount.adultsCount}  adulte(s)`}
-         ${tripPlanner.data.personsCount?.childrenCount ? `${tripPlanner.data.personsCount.childrenCount}  enfant(s)` : ''}
-             ${tripPlanner.data.personsCount?.babiesCount ? `${tripPlanner.data.personsCount.babiesCount}  bébé(s)` : ''}
-         pendant ${tripPlanner.data.days} jours pour un moment ${tripPlanner.data.theme}`
-    }, [tripPlanner.data]);
+         ${tripPlanner.data.personsCount?.childrenCount ? `, ${tripPlanner.data.personsCount.childrenCount}  enfant(s)` : ''}
+             ${tripPlanner.data.personsCount?.babiesCount ? `et ${tripPlanner.data.personsCount.babiesCount}  bébé(s)` : ''}
+         pendant ${tripPlanner.data.days} jours pour un moment ${tripPlanner.data.theme && t(tripPlanner.data.theme.label)}`
+        return [englishQuery, frenchQuery]
+    }, [tripPlanner.data, t]);
 
     useEffect(() => {
         setTripPlannerQuery(buildTripPlannerQueryFromData())
@@ -69,7 +68,7 @@ const ResultScreen: FunctionComponent = () => {
                             className="trip-planner-screen--content-title">{t("common.result.title")}</Typography.Text>
                     </div>
                     <div className="result--item-container">
-                        <Typography.Text>{tripPlanner.query}</Typography.Text>
+                        <Typography.Text>{tripPlanner.frenchQuery}</Typography.Text>
                     </div>
                     <div className="result--item-container">
                         <Typography.Text

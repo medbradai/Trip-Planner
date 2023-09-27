@@ -20,7 +20,7 @@ const DatesScreen: FunctionComponent = () => {
     const tripPlanner = useStore(TripPlannerStore);
     const [form] = Form.useForm();
 
-    const[days, setDays] = useState<number | undefined>(undefined);
+    const [days, setDays] = useState<number | undefined>(undefined);
     const handleNext = () => {
         form.validateFields().then(() => {
                 const startDate = dayjs(form.getFieldValue("date")[0]);
@@ -39,24 +39,27 @@ const DatesScreen: FunctionComponent = () => {
 
     return (
         <TripPlannerLayout previousUrl="/participants">
-            <Form form={form}>
-                <Typography.Text className="trip-planner-screen--content-title">{t("common.date.title")}</Typography.Text>
-                <Form.Item
-                    name="date"
-                    rules={[{required: true, message: t("common.empty")}]}
-                    style={{width: '70%'}}
-                >
-                    <RangePicker locale={locale} onChange={(values) => {
-                        const startDate = values && values[0];
-                        const endDate = values && values[1];
-                        startDate && endDate && setDays(endDate.diff(startDate, 'day'))
-                    }}/>
-                </Form.Item>
+            <>
+                <Typography.Text
+                    className="trip-planner-screen--content-title">{t("common.date.title")}</Typography.Text>
+                <Form form={form} className="dates-screen--form">
+                    <Form.Item
+                        name="date"
+                        rules={[{required: true, message: t("common.empty")}]}
+                    >
+                        <RangePicker locale={locale} onChange={(values) => {
+                            const startDate = values && values[0];
+                            const endDate = values && values[1];
+                            startDate && endDate && setDays(endDate.diff(startDate, 'day'))
+                        }}/>
+                    </Form.Item>
+                    <Button className="dates-screen--button" type="primary" icon={<SendOutlined rotate={-45}/>}
+                            onClick={handleNext}/>
+                </Form>
                 {days && <Typography.Text>{t("common.date.days", {days})}</Typography.Text>}
                 <div className="dates-screen--button-container">
-                <Button className="dates-screen--button" type="primary" icon={<SendOutlined rotate={-45}/>} onClick={handleNext}/>
                 </div>
-            </Form>
+            </>
         </TripPlannerLayout>
     )
 }

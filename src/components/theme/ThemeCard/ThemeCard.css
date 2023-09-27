@@ -3,3 +3,8 @@
     border-top-right-radius: 0.5rem;
     height: 100%;
 }
+
+.theme--card-selected {
+    border: 0.1rem solid #9C9C9C !important;
+    background-color: lightgray;
+}
