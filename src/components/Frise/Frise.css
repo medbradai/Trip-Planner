@@ -1,0 +1,184 @@
+.Frise__Wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+  
+  width: 100%;
+  height: 380px;
+  position: relative;
+  overflow-y: hidden;
+  margin-top: 20vh;
+  margin-bottom: 20vh;
+  border-radius: 20px;
+  background: rgba(175, 141, 97, 0.1);
+  padding: 40px;
+  
+}
+
+.Frise__Container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.Frise_Timeline{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 31px;
+    padding-bottom: 31px;
+}
+.Frise__Line {
+  width: 100%;
+  height: 4px;
+  background: #af8d61;
+  z-index: 2;
+}
+
+.Frise__Elements {
+  position: relative;
+  width: 200px;
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+.Frise__Elements__Dot {
+  position: absolute;
+  z-index: 3;
+  background-color: #af8d61;
+  width: 31px;
+  height: 31px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Frise__Elements__Dot__Inner {
+  position: absolute;
+  background-color: white;
+  width: 90%;
+  height: 90%;
+  border-radius: 100%;
+}
+.Frise__Elements__Content__Container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  
+}
+.Frise__Elements__Content {
+  max-height: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  line-height: unset;
+  position: relative;
+  padding-left: 8px;
+  max-height: 102px;
+}
+
+
+
+.Frise__Elements__Content::before {
+   content: "";
+   position: absolute;
+   background: rgba(0, 0, 0, 0.10);
+   height: 80%;
+   width: 1px;
+   left: 0;
+   top: 0;
+  }
+
+.Frise__Elements__Content .Day{
+    color: #AF8D61;
+font-family: Open Sans;
+font-size: 12px;
+font-style: normal;
+font-weight: 700;
+line-height: 12px; /* 100% */
+letter-spacing: 0.018px;
+}
+.Frise__Elements__Content .Moment{
+    color: #AF8D61;
+font-family: Open Sans;
+font-size: 12px;
+font-style: italic;
+font-weight: 600;
+line-height: 12px;
+letter-spacing: 0.018px;
+}
+.Frise__Elements__Content p {
+  color: var(--Noir, #000);
+  font-family: Open Sans;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 138.462% */
+  letter-spacing: 0.02px;
+}
+
+.Frise__Elements--Top {
+  align-items: flex-start;
+}
+
+.Frise__Elements--Bottom {
+  align-items: flex-end;
+}
+.Frise__Elements--Bottom .Frise__Elements__Content{
+    margin-top: 16px;
+}
+/* Styles for Webkit browsers: Chrome, Safari */
+.Frise__Wrapper::-webkit-scrollbar {
+    height: 2px; /* Thickness of the scrollbar */
+}
+
+.Frise__Wrapper::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Background of the entire scrollbar */
+}
+
+.Frise__Wrapper::-webkit-scrollbar-thumb {
+    background-color: #af8d61; /* Color of the draggable scroll handle */
+    border-radius: 5px; /* Roundness of the draggable scroll handle */
+}
+
+.Frise__Wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: #9b7151; /* Color when hovering over the draggable scroll handle */
+}
+
+/* Styles for Firefox */
+.Frise__Wrapper {
+    scrollbar-color: #af8d61 #f1f1f1; /* First color is the thumb (draggable part), second color is the track */
+    scrollbar-width: thin; /* Thickness of the scrollbar, can be "thin", "none", or a specific value (e.g., "10px") */
+    scroll-behavior: smooth;
+}
+
+
+
+.Frise__Wrapper {
+    perspective: 1000px; /* Ajustez cette valeur pour modifier l'intensité de la perspective */
+}
+
+.Frise__Line {
+    width: 0;
+}
+
+.Frise__Elements__Dot {
+    width: 0px;
+    height: 0px;
+}
+
+.Frise__Elements__Content{
+    opacity: 0;
+}
+
+.Frise__Elements__Content__Container.Frise__Elements--Top .Frise__Elements__Content {
+    transform-origin: bottom center;
+    transform: rotateX(90deg);
+}
+
+.Frise__Elements__Content__Container.Frise__Elements--Bottom .Frise__Elements__Content {
+    transform-origin: top center;
+    transform: rotateX(-90deg);
+}
