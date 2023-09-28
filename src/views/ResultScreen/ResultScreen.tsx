@@ -63,7 +63,7 @@ const ResultScreen: FunctionComponent = () => {
                             className="trip-planner-screen--content-title">{t("common.result.title")}</Typography.Text>
                     </div>
                     <div className="result--item-container">
-                        <Typography.Text>{tripPlanner.englishQuery}</Typography.Text>
+                        <Typography.Text>{tripPlanner.englishQuery?.replace("destination", "to")}</Typography.Text>
                     </div>
                     <div className="result--item-container">
                         <Typography.Text
