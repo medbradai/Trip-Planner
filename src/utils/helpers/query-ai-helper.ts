@@ -45,7 +45,7 @@ export const buildFriseFromAIResponse = (response: string): FriseItem[] => {
         result.push({
             day: `Day ${dayNumber + 1}`,
             moment: "Night",
-            description: oneDay.substring(oneDay.lastIndexOf("Night:"), oneDay.length)
+            description: oneDay.substring(nightOrEveningIndex, oneDay.length)
         })
 
     })
