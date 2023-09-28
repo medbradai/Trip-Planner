@@ -36,15 +36,16 @@ export const buildFriseFromAIResponse = (response: string): FriseItem[] => {
             moment: "Afternoon",
             description: oneDay.substring(oneDay.lastIndexOf("Afternoon:"), oneDay.indexOf("Evening:"))
         })
+        const nightOrEveningIndex = oneDay.indexOf("Night:") !== - 1 ? oneDay.indexOf("Night:") : oneDay.indexOf("Diner:");
         result.push({
             day: `Day ${dayNumber + 1}`,
             moment: "Evening",
-            description: oneDay.substring(oneDay.lastIndexOf("Evening:"), oneDay.indexOf("Dinner:"))
+            description: oneDay.substring(oneDay.lastIndexOf("Evening:"), nightOrEveningIndex)
         })
         result.push({
             day: `Day ${dayNumber + 1}`,
             moment: "Night",
-            description: oneDay.substring(oneDay.lastIndexOf("Dinner:"), oneDay.length)
+            description: oneDay.substring(oneDay.lastIndexOf("Night:"), oneDay.length)
         })
 
     })
