@@ -1,0 +1,51 @@
+{
+  "common": {
+    "yes": "Yes",
+    "no": "No",
+    "title2": "Here, everything is personalized, prepared and reserved in one go!",
+    "title1": "Plan your time optimally",
+    "ellipse": {
+      "default": "You'll have to tell us a little about how you imagine things..",
+      "result": "Okay, so I'll recap..."
+    },
+    "city": "Which city do you want to go to?",
+    "participants": {
+      "title": "Will you be alone or accompanied?",
+      "count": {
+        "adults": "Adult(s)",
+        "children": "Children",
+        "babies": "Babie(s)"
+      }
+    },
+    "previous": "last step",
+    "date": {
+      "title": "When ?",
+      "days": "{{days}} night(s)"
+    },
+    "budget": "What theme appeals to you?",
+
+    "empty": "Required",
+    "result": {
+      "title": "You want to go",
+      "confirm": "That's right ?",
+      "result": "Here is what I suggest to you:"
+    },
+    "steps": {
+      "city": "City",
+      "participants": "Participants",
+      "date": "Date",
+      "theme": "Theme",
+      "result": "Result"
+    },
+    "themes": {
+      "relaxation": "Relaxation",
+      "sport": "Sport",
+      "romance": "Romance",
+      "discovery": "Discovery",
+      "family": "Family",
+      "lowCost": "Low Cost",
+      "unusual": "Unusual"
+    },
+    "success": "Your trip has been successfully planned"
+  }
+}

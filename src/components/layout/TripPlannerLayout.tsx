@@ -1,27 +1,20 @@
 import "./TripPlannerLayout.css"
-import React, {FunctionComponent, ReactElement} from "react";
+import {FunctionComponent, ReactElement} from "react";
 import {Content, Header} from "antd/es/layout/layout";
 import {Image, Layout, Typography} from "antd";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
 import {ArrowLeftOutlined} from "@ant-design/icons";
 
-export const stepsTitleStyle: React.CSSProperties = {
-    fontSize: "18px",
-    fontFamily: "Open Sans",
-    color: '#2816C0',
-    fontWeight: 600
-}
-
 interface TripPlannerLayoutProps {
     children: ReactElement;
-    ellipseSource?: string
+    ellipseText?: string
     previousUrl?: string;
 }
 
 const TripPlannerLayout: FunctionComponent<TripPlannerLayoutProps> = ({
                                                                           children,
-                                                                          ellipseSource = "/img/ellipse.svg",
+                                                                          ellipseText = "common.ellipse.default",
                                                                           previousUrl
                                                                       }) => {
     const {t} = useTranslation();
@@ -43,10 +36,12 @@ const TripPlannerLayout: FunctionComponent<TripPlannerLayoutProps> = ({
                             height={212}
                             src="/img/image 1.svg"
                         />
-                        <Image
-                            preview={false}
-                            src={ellipseSource}
-                        />
+                        <div className="trip-planner-screen--ellipse-container">
+                        <img
+                            src="/img/ellipse-2.svg"
+                         alt="ellipse-2" />
+                            <span className="trip-planner-screen--ellipse-content">{t(ellipseText)}</span>
+                        </div>
                     </div>
                     <div className="trip-planner-screen--route-content">
                         {previousUrl &&

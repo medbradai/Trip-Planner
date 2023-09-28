@@ -22,6 +22,19 @@
     font-weight: 600
 }
 
+.trip-planner-screen--ellipse-container {
+    position: relative;
+    line-height: normal;
+}
+
+.trip-planner-screen--ellipse-content {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    font-family: "Open Sans", serif;
+    font-style: italic;
+}
+
 .trip-planner-screen--content {
     padding-left: 10vw;
     padding-right: 10vw;

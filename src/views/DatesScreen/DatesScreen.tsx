@@ -5,8 +5,6 @@ import {useTranslation} from "react-i18next";
 import {SendOutlined} from "@ant-design/icons";
 import TripPlannerLayout from "src/components/layout/TripPlannerLayout";
 import dayjs from 'dayjs';
-import locale from 'antd/es/date-picker/locale/fr_FR';
-import 'dayjs/locale/fr';
 import {setTripPlanner} from "../../store/TripPlannerEvents";
 import {useStore} from "effector-react";
 import {TripPlannerStore} from "../../store/TripPlannerStore";
@@ -47,7 +45,7 @@ const DatesScreen: FunctionComponent = () => {
                         name="date"
                         rules={[{required: true, message: t("common.empty")}]}
                     >
-                        <RangePicker locale={locale} onChange={(values) => {
+                        <RangePicker onChange={(values) => {
                             const startDate = values && values[0];
                             const endDate = values && values[1];
                             startDate && endDate && setDays(endDate.diff(startDate, 'day'))

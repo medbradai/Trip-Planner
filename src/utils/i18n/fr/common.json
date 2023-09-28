@@ -4,6 +4,10 @@
     "no": "Non",
     "title2": "Ici, tout est personnalisé, préparé et réservé en 1 seule fois !",
     "title1": "Planifiez votre moment de manière optimale",
+    "ellipse": {
+      "default": "Il va falloir nous raconter un peu comment vous imaginez les choses..",
+      "result": "Okay, donc je récapitule.."
+    },
     "city": "Dans quelle ville souhaitez-vous aller ?",
     "participants": {
       "title": "Serez-vous seul ou accompagné ?",

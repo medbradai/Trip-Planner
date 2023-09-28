@@ -3,7 +3,7 @@ import i18n from "i18next";
 import {FriseItem} from "../../lib/tripplanner/frise.item";
 
 export const buildAIQuery = (tripPlannerData: TripPlannerData): string => {
-    return `destination  ${tripPlannerData.destination} with ${tripPlannerData.personsCount?.adultsCount && `${tripPlannerData.personsCount.adultsCount}  adult(s)`}${tripPlannerData.personsCount?.childrenCount ? `, ${tripPlannerData.personsCount.childrenCount} children` : ''}${tripPlannerData.personsCount?.babiesCount ? ` and ${tripPlannerData.personsCount.babiesCount}  babies` : ''} for ${tripPlannerData.days} days for a moment ${tripPlannerData.theme && i18n.t(tripPlannerData.theme.label)}`;
+    return `destination  ${tripPlannerData.destination} with ${tripPlannerData.personsCount?.adultsCount && `${tripPlannerData.personsCount.adultsCount}  adult(s)`}${tripPlannerData.personsCount?.childrenCount ? `, ${tripPlannerData.personsCount.childrenCount} children` : ''}${tripPlannerData.personsCount?.babiesCount ? ` and ${tripPlannerData.personsCount.babiesCount}  babies` : ''} for ${tripPlannerData.days} days for a moment ${tripPlannerData.theme && i18n.t(tripPlannerData.theme.label).toLocaleLowerCase()}`;
 
 };
 
@@ -12,7 +12,7 @@ export const buildFrenchQuery = (tripPlannerData: TripPlannerData): string => {
         ${tripPlannerData.personsCount?.adultsCount && `${tripPlannerData.personsCount.adultsCount}  adulte(s)`}
          ${tripPlannerData.personsCount?.childrenCount ? `, ${tripPlannerData.personsCount.childrenCount}  enfant(s)` : ''}
              ${tripPlannerData.personsCount?.babiesCount ? `et ${tripPlannerData.personsCount.babiesCount}  bébé(s)` : ''}
-         pendant ${tripPlannerData.days} jours pour un moment ${tripPlannerData.theme && i18n.t(tripPlannerData.theme.label)}`
+         pendant ${tripPlannerData.days} jours pour un moment ${tripPlannerData.theme && i18n.t(tripPlannerData.theme.label).toLocaleLowerCase()}`
 };
 
 export const buildFriseFromAIResponse = (response: string): FriseItem[] => {

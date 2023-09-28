@@ -54,7 +54,7 @@ const ResultScreen: FunctionComponent = () => {
 
 
     return (
-        <TripPlannerLayout ellipseSource={"/img/ellipse-result.svg"} previousUrl="/theme">
+        <TripPlannerLayout ellipseText={"common.ellipse.result"} previousUrl="/theme">
             <Spin tip="Loading..." spinning={isLoading}>
                 <Form layout={"vertical"} className="trip-planner-screen--form" onFinish={handleSubmit} form={form}>
                     {contextHolder}
@@ -63,7 +63,7 @@ const ResultScreen: FunctionComponent = () => {
                             className="trip-planner-screen--content-title">{t("common.result.title")}</Typography.Text>
                     </div>
                     <div className="result--item-container">
-                        <Typography.Text>{tripPlanner.frenchQuery}</Typography.Text>
+                        <Typography.Text>{tripPlanner.englishQuery}</Typography.Text>
                     </div>
                     <div className="result--item-container">
                         <Typography.Text
