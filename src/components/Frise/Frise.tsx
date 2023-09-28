@@ -16,27 +16,8 @@ const Frise: FC<FriseProps> = ({result}) => {
     const [friseItems, setFriseItems] = useState<FriseItem[]>([])
 
     React.useEffect(() => {
-        const timeline = gsap.timeline({defaults: {duration: 0.3}});
-
         try {
             setFriseItems(buildFriseFromAIResponse(result));
-            friseItems.forEach((_, index) => {
-                timeline
-                    .to(`.Frise__Elements:nth-child(${index + 1}) .Frise__Elements__Dot`, {
-                        width: "31px",
-                        height: "31px"
-                    })
-                    .to(`.Frise__Elements:nth-child(${index + 1}) .Frise__Elements__Content`, {
-                        opacity: 1,
-                        rotateX: '0deg'
-                    }, "-=0.2")
-                    .to(`.Frise__Elements:nth-child(${index + 1}) .Frise__Line`, {width: "100%"}, "-=0.2")
-                    .to(`.Frise__Elements:nth-child(${index + 2}) .Frise__Elements__Dot`, {
-                        width: "31px",
-                        height: "31px"
-                    }, "-=0.2")
-
-            });
         } catch (e) {
             console.log(`Erreur lors du parsing de la réponse ${result}`)
             messageApi.error("Erreur lors du parsing de la réponse")
@@ -45,6 +26,28 @@ const Frise: FC<FriseProps> = ({result}) => {
 
     }, [result, friseItems, messageApi]);
 
+    React.useEffect(() => {
+        const timeline = gsap.timeline({defaults: {duration: 0.3}});
+        friseItems.forEach((_, index) => {
+            timeline
+                .to(`.Frise__Elements:nth-child(${index + 1}) .Frise__Elements__Dot`, {
+                    width: "31px",
+                    height: "31px"
+                })
+                .to(`.Frise__Elements:nth-child(${index + 1}) .Frise__Elements__Content`, {
+                    opacity: 1,
+                    rotateX: '0deg'
+                }, "-=0.2")
+                .to(`.Frise__Elements:nth-child(${index + 1}) .Frise__Line`, {width: "100%"}, "-=0.2")
+                .to(`.Frise__Elements:nth-child(${index + 2}) .Frise__Elements__Dot`, {
+                    width: "31px",
+                    height: "31px"
+                }, "-=0.2")
+    }, [friseItems]);
+
+
+
+    });
 
     return (
         <>
