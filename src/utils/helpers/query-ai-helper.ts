@@ -17,37 +17,47 @@ export const buildFrenchQuery = (tripPlannerData: TripPlannerData): string => {
 
 export const buildFriseFromAIResponse = (response: string): FriseItem[] => {
     const result: FriseItem[] = [];
-    const filteredResponse = response.split("Day 1")[1]
+    let filteredResponse = ""
+    if(response.indexOf("Day 1") !== -1) {
+        filteredResponse = response.split("Day 1")[1]
+    } else {
+        filteredResponse = response.split("Day number 1")[1]
+    }
+
     const days = filteredResponse.split("Day");
     days.forEach((oneDay, dayNumber) => {
         result.push({
             day: `Day ${dayNumber + 1}`,
             moment: "Morning",
-            description: oneDay.substring(oneDay.lastIndexOf("Morning:"), oneDay.indexOf("Lunch:"))
+            description: oneDay.substring(oneDay.indexOf("Morning:") + 8, oneDay.indexOf("Lunch:"))
         })
 
         result.push({
             day: `Day ${dayNumber + 1}`,
             moment: "Lunch",
-            description: oneDay.substring(oneDay.lastIndexOf("Lunch:"), oneDay.indexOf("Afternoon:"))
+            description: oneDay.substring(oneDay.indexOf("Lunch:") + 7, oneDay.indexOf("Afternoon:"))
         })
+        const lastAfternoonIndex = oneDay.indexOf("Evening:") !== -1 ? oneDay.indexOf("Evening:") : undefined;
         result.push({
             day: `Day ${dayNumber + 1}`,
             moment: "Afternoon",
-            description: oneDay.substring(oneDay.lastIndexOf("Afternoon:"), oneDay.indexOf("Evening:"))
+            description: oneDay.substring(oneDay.lastIndexOf("Afternoon:") + 10, lastAfternoonIndex || oneDay.lastIndexOf("\n"))
         })
-        const nightOrDinerIndex = oneDay.indexOf("Night:") !== - 1 ? oneDay.indexOf("Night:") : oneDay.indexOf("Diner:");
-        result.push({
-            day: `Day ${dayNumber + 1}`,
-            moment: "Evening",
-            description: oneDay.substring(oneDay.lastIndexOf("Evening:"), nightOrDinerIndex)
-        })
-        result.push({
-            day: `Day ${dayNumber + 1}`,
-            moment: "Night",
-            description: oneDay.substring(nightOrDinerIndex, oneDay.length)
-        })
-
+        if(lastAfternoonIndex) {
+            const lastEveningIndex = oneDay.indexOf("Night:") !== - 1 ? oneDay.indexOf("Night:") : undefined;
+            result.push({
+                day: `Day ${dayNumber + 1}`,
+                moment: "Evening",
+                description: oneDay.substring(oneDay.indexOf("Evening:") + 8, lastEveningIndex || oneDay.lastIndexOf("\n"))
+            })
+            if(lastEveningIndex) {
+                result.push({
+                    day: `Day ${dayNumber + 1}`,
+                    moment: "Night",
+                    description: oneDay.substring(oneDay.indexOf("Night:") + 6, oneDay.lastIndexOf("\n"))
+                })
+            }
+        }
     })
     return result;
 }
