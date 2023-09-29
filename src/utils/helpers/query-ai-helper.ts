@@ -21,10 +21,10 @@ export const buildFriseFromAIResponse = (response: string): FriseItem[] => {
     if(response.indexOf("Day 1") !== -1) {
         filteredResponse = response.split("Day 1")[1]
     } else {
-        filteredResponse = response.split("Day number 1")[1]
+        filteredResponse = response.split("Day number")[1]
     }
 
-    const days = filteredResponse.split("Day");
+    const days = filteredResponse.split("\nDay");
     days.forEach((oneDay, dayNumber) => {
         result.push({
             day: `Day ${dayNumber + 1}`,
@@ -37,24 +37,27 @@ export const buildFriseFromAIResponse = (response: string): FriseItem[] => {
             moment: "Lunch",
             description: oneDay.substring(oneDay.indexOf("Lunch:") + 7, oneDay.indexOf("Afternoon:"))
         })
+        const firstAfternoonIndex = oneDay.lastIndexOf("Afternoon:") + 10
         const lastAfternoonIndex = oneDay.indexOf("Evening:") !== -1 ? oneDay.indexOf("Evening:") : undefined;
         result.push({
             day: `Day ${dayNumber + 1}`,
             moment: "Afternoon",
-            description: oneDay.substring(oneDay.lastIndexOf("Afternoon:") + 10, lastAfternoonIndex || oneDay.lastIndexOf("\n"))
+            description: oneDay.substring(firstAfternoonIndex, lastAfternoonIndex || oneDay.lastIndexOf("\n") > firstAfternoonIndex ? oneDay.lastIndexOf("\n") : oneDay.length)
         })
         if(lastAfternoonIndex) {
+            const firstEveningIndex = oneDay.indexOf("Evening:") + 8;
             const lastEveningIndex = oneDay.indexOf("Night:") !== - 1 ? oneDay.indexOf("Night:") : undefined;
             result.push({
                 day: `Day ${dayNumber + 1}`,
                 moment: "Evening",
-                description: oneDay.substring(oneDay.indexOf("Evening:") + 8, lastEveningIndex || oneDay.lastIndexOf("\n"))
+                description: oneDay.substring(firstEveningIndex, lastEveningIndex || oneDay.lastIndexOf("\n") > firstEveningIndex ? oneDay.lastIndexOf("\n") : oneDay.length)
             })
             if(lastEveningIndex) {
+                const lastNightIndex = oneDay.lastIndexOf("\n") > oneDay.indexOf("Night:") ? oneDay.lastIndexOf("\n") : undefined
                 result.push({
                     day: `Day ${dayNumber + 1}`,
                     moment: "Night",
-                    description: oneDay.substring(oneDay.indexOf("Night:") + 6, oneDay.lastIndexOf("\n"))
+                    description: oneDay.substring(oneDay.indexOf("Night:") + 6, lastNightIndex || oneDay.length)
                 })
             }
         }
